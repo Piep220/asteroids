@@ -2,6 +2,7 @@
 # the open-source pygame library
 # throughout this file
 ## BASE IMPORTS #################################
+import sys
 import pygame
 from constants import *
 
@@ -34,7 +35,7 @@ def main():
     asteroid_field = AsteroidField()
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
-    ## MAIN GAME LOOP ###############################################
+    ## MAIN GAME LOOP ####################################################
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -42,6 +43,11 @@ def main():
             
         ## GAMEPLAY #######################################
         updatable.update(dt)
+        for asteroid in asteroids:
+            if asteroid.collides_with(player):
+                print("Game over!")
+                sys.exit()
+
 
         ## DRAW CALLS #####################################
         screen.fill("black")
