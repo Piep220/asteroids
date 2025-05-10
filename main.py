@@ -47,9 +47,16 @@ def main():
         ## GAMEPLAY #######################################
         updatable.update(dt)
         for asteroid in asteroids:
+            ## SHOT PLAYER
             if asteroid.collides_with(player):
                 print("Game over!")
                 sys.exit()
+            ## SHOT ASTEROID
+            for shot in shots:
+                if asteroid.collides_with(shot):
+                    shot.kill()
+                    asteroid.split()
+
 
         ## DRAW CALLS #####################################
         screen.fill("black")
